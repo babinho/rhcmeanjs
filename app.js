@@ -6,27 +6,16 @@ const fs           = require('fs'),
 	  express = require('express'),
 	  
 	  html = require('html')
-
+		MongoClient = require('mongodb').MongoClient,
+		assert = require('assert')
 
 let app = express();
-
-
- 
-  
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-
-
-
 
 //----------------dbconfig------------------
 var marke = 'marke';
 var nalog = 'nalog';
-var mongoUrl = 'mongodb://localhost:27017/test';
+let var mongoUrl = 'mongodb://localhost:27017/infoplanetservisapp';
 //---------------------------------------------------
-
-
-
 
 
 var insertDocument = function(db,collection,data, callback) {
@@ -121,7 +110,7 @@ app.get('/', function(req,res){
 	res.render('index.html');
 });
 
-app.get('/nalogunos', function(req,res){
+app.get('/nalognovi', function(req,res){
 	console.log(req.query);
 	insertiraj(url,nalog,req.query);
 	res.send({message:'Uspješno unesen servisni nalog'});
@@ -141,15 +130,13 @@ app.get('/selection', function(req,res){
 		}
 	});
 });
-
- 
  
  // IMPORTANT: Your application HAS to respond to GET /health with status 200
   //            for OpenShift health monitoring
 
   app.get('/health',function(req,res) {
     res.writeHead(200);
-	res.end();
+	res.send();
   });
 
   

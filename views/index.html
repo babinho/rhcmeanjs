@@ -294,7 +294,7 @@ kad bude optimizacija -->
 
     $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').focus();
-    })
+    });
 
  function ajax(data,url,sucess){
 		console.log('ušlo u metodu');
@@ -352,17 +352,17 @@ kad bude optimizacija -->
 		return nalog;
 	}
 	
+	
+	
 	function unesiNalog()
 	{
 		var nalog = dohvatiUneseno();
-		ajax(nalog,'/nalogunos',function(result){
+		ajax(nalog,'/nalognovi',function(result){
 			console.log(result);
 		});
 	}
 	
-	function popuniSelection(id){
-		
-	}
+	
     </script>
   </div>
 </body>
