@@ -142,16 +142,14 @@ app.get('/selection', function(req,res){
 	});
 });
 
+ 
+ 
  // IMPORTANT: Your application HAS to respond to GET /health with status 200
   //            for OpenShift health monitoring
 
-  
-  
-
- 
   app.get('/health',function(req,res) {
     res.writeHead(200);
-	res.send();
+	res.end();
   });
 
   
