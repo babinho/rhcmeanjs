@@ -2,10 +2,10 @@ const fs           = require('fs'),
       path         = require('path'),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
-      env          = process.env;
-	  express = require('express');
+      env          = process.env,
+	  express = require('express'),
 	  
-	  html = require('html');
+	  html = require('html')
 
 
 let app = express();
@@ -13,7 +13,7 @@ let app = express();
 
  
   
-  var MongoClient = require('mongodb').MongoClient;
+var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
 
