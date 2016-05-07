@@ -1,5 +1,4 @@
-const http         = require('http'),
-      fs           = require('fs'),
+const fs           = require('fs'),
       path         = require('path'),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
