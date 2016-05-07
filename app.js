@@ -11,16 +11,8 @@ const http         = require('http'),
 
 let app = express();
 
-let server = http.createServer(function (req, res) {
-  let url = req.url;
-  if (url == '/') {
-    url += 'index.html';
-  }
 
-  // IMPORTANT: Your application HAS to respond to GET /health with status 200
-  //            for OpenShift health monitoring
-
-  
+ 
   
   var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
@@ -151,12 +143,20 @@ app.get('/selection', function(req,res){
 	});
 });
 
-
-
-
+ // IMPORTANT: Your application HAS to respond to GET /health with status 200
+  //            for OpenShift health monitoring
 
   
   
+
+ 
+  app.get('/health',function(req,res) {
+    res.writeHead(200);
+	res.send();
+  });
+
+  
+ /* 
   if (url == '/health') {
     res.writeHead(200);
     res.end();
@@ -184,7 +184,11 @@ app.get('/selection', function(req,res){
 server.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', function () {
   console.log(`Application worker ${process.pid} started...`);
 });
-app.listen("8080",function(){
+
+*/
+
+
+app.listen(env.NODE_PORT || 8080, env.NODE_IP || 'localhost',function(){
 	console.log('listen 8080');
 });
 
