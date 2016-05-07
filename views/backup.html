@@ -1,0 +1,142 @@
+<div class="unos-naloga">
+    <div class="container">
+      <h4>Informacije o kupcu</h4>
+
+
+        <label class="col-md-1">Kupac</label>
+
+        <div >
+          <input type="text" class="form-control" id="ime" placeholder="Ime kupca" />
+        </div>
+
+        <div >
+          <input type="text" class="form-control" id="prezime" placeholder=
+          "Prezime kupca" />
+        </div>
+
+    </div>
+
+    <div class="container">
+      <h4>Informacije o ure&#273;aju</h4>
+
+      <div class="row">
+        <label >Vrsta ure&#273;aja</label>
+
+        <div>
+          <select id="vrsta" class="selectpicker">
+            <option>
+              Mustard
+            </option>
+
+            <option>
+              Ketchup
+            </option>
+
+            <option>
+              Relish
+            </option>
+          </select>
+        </div><label>Marka</label>
+
+        <div >
+          <select id="marka" class="selectpicker">
+            <option>
+              Mustard
+            </option>
+
+            <option>
+              Ketchup
+            </option>
+
+            <option>
+              Relish
+            </option>
+          </select>
+        </div><label >Model</label>
+
+        <div >
+          <input type="text" class="form-control" id="model" placeholder="model" />
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>Informacije o kvaru</h4>
+
+      <div class="row">
+        <div>
+          <div>
+            <label>Opis kvara</label>
+          </div>
+          <textarea id="opiskvara" name="opis" rows="5" cols="60">
+</textarea>
+        </div>
+
+        <div class="col-md-6">
+          <div>
+            <label>Prepostavka kvara</label>
+          </div>
+          <textarea id="pretpkvara" name="prepostavka" rows="5" cols="60">
+</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>Cijena i dodatno</h4>
+
+      <div class="row">
+        <div >
+          <label>Pretpostavka cijene:</label>
+
+          <div>
+            <input type="text" class="form-control" id="pretpcijena" placeholder=
+            "Pretp cijene." />
+          </div>
+
+          <div class="checkbox">
+            <label><input id="adapter" type="checkbox" value="" />Adapter</label>
+          </div>
+
+          <div class="checkbox">
+            <label><input id="torba" type="checkbox" value="" />Torba</label>
+          </div>
+
+          <div class="checkbox">
+            <label><input type="checkbox" value="" />Option 3</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="col-md-1">Serviser:</label>
+
+        <div class="col-md-3">
+          <select id="serviser" class="selectpicker">
+            <option>
+              Mustard
+            </option>
+
+            <option>
+              Ketchup
+            </option>
+
+            <option>
+              Relish
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>Potvrda naloga</h4>
+
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-primary" onclick="test(getAll(),'/nalogunos')">Unesi
+          servisni nalog</button>
+        </div>
+      </div>
+    </div>
+  </div>

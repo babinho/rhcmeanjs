@@ -8,5 +8,16 @@
     "start": "node --use_strict start.js"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "html": "0.0.10",
+    "mongodb": "^2.1.18"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "ssh://572cee3d7628e10d44000090@infoplanetservisapp-krunozecevic.rhcloud.com/~/git/infoplanetservisapp.git/"
+  }
 }
