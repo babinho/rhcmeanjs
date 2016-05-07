@@ -16,7 +16,7 @@ let app = express();
 var marke = 'marke';
 var nalog = 'nalog';
 
-let mongoUrl = 'mongodb://localhost:27017/infoplanetservisapp';
+let mongoUrl = 'mongodb://127.0.0.1:27017/infoplanetservisapp';
 //---------------------------------------------------
 
 
@@ -25,7 +25,7 @@ var insertDocument = function(db,collection,data, callback) {
 			data,
 			function(err, result) {
 				if(err)
-					console.log('failed to insert')
+					console.log('failed to insert');
 				
 				assert.equal(err, null);
 				console.log("insertiarno u kolekciju naloga");
@@ -35,8 +35,8 @@ var insertDocument = function(db,collection,data, callback) {
 };
 
 
-var insertiraj = function(mongoUrl,collection,data){
-	MongoClient.connect(url, function(err, db) {
+var insertiraj = function(collection,data){
+	MongoClient.connect(mongoUrl, function(err, db) {
 	  assert.equal(null, err);
 	  insertDocument(db,collection,data, function() {
 		  db.close();
@@ -114,7 +114,7 @@ app.get('/', function(req,res){
 
 app.get('/nalognovi', function(req,res){
 	console.log(req.query);
-	insertiraj(url,nalog,req.query);
+	insertiraj(nalog,req.query);
 	res.send({message:'Uspješno unesen servisni nalog'});
 });
 
