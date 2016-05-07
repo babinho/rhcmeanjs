@@ -1,3 +1,4 @@
+
 const fs           = require('fs'),
       path         = require('path'),
       contentTypes = require('./utils/content-types'),
@@ -5,7 +6,7 @@ const fs           = require('fs'),
       env          = process.env,
 	  express = require('express'),
 	  
-	  html = require('html')
+	  html = require('html'),
 		MongoClient = require('mongodb').MongoClient,
 		assert = require('assert')
 
@@ -14,7 +15,8 @@ let app = express();
 //----------------dbconfig------------------
 var marke = 'marke';
 var nalog = 'nalog';
-let var mongoUrl = 'mongodb://localhost:27017/infoplanetservisapp';
+
+let mongoUrl = 'mongodb://localhost:27017/infoplanetservisapp';
 //---------------------------------------------------
 
 
