@@ -13,33 +13,38 @@ const fs           = require('fs'),
 let app = express();
 
 //----------------dbconfig------------------
-var marke = 'marke';
-var nalog = 'nalog';
+
 
 let mongoUrl = 'mongodb://127.0.0.1:27017/infoplanetservisapp';
 //---------------------------------------------------
 
 
-var insertDocument = function(db,collection,data, callback) {
+var insertDocument = function(db,collection,data, success,fail) {
    db.collection(collection).insert(
 			data,
 			function(err, result) {
-				if(err)
+				if(err){
 					console.log('failed to insert');
-				
-				assert.equal(err, null);
-				console.log("insertiarno u kolekciju naloga");
-				callback();
+					fail(err);
+					db.close();
+				}
+				else{
+					assert.equal(err, null);
+					console.log("insertiarno u kolekciju naloga");
+					success();
+					db.close();
+				}
 		  }
   );
 };
 
 
-var insertiraj = function(collection,data){
+var insertiraj = function(collection,data,success,fail){
 	MongoClient.connect(mongoUrl, function(err, db) {
 	  assert.equal(null, err);
 	  insertDocument(db,collection,data, function() {
-		  db.close();
+		  success();
+		  
 	  });
 	});
 }
@@ -114,8 +119,11 @@ app.get('/', function(req,res){
 
 app.get('/nalognovi', function(req,res){
 	console.log(req.query);
-	insertiraj(nalog,req.query);
-	res.send({message:'Uspješno unesen servisni nalog'});
+	insertiraj('nalog',req.query,function{
+		res.send({message:'Uspješno unesen servisni nalog'});
+	},function(err){
+		res.send(err);
+	}
 });
 
 app.get('/selection', function(req,res){
@@ -131,6 +139,8 @@ app.get('/selection', function(req,res){
 			res.send({message : '404'});
 		}
 	});
+},function(){
+	res.send()
 });
  
  // IMPORTANT: Your application HAS to respond to GET /health with status 200
