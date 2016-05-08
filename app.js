@@ -15,7 +15,7 @@ let app = express();
 //----------------dbconfig------------------
 
 
-let mongoUrl = 'mongodb://127.5.99.130:27017/infoplanetservisapp';
+let mongoUrl = 'mongodb://admin:VTrLiJlV8RbY@127.5.99.130:27017/infoplanetservisapp';
 //---------------------------------------------------
 
 
