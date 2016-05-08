@@ -119,11 +119,11 @@ app.get('/', function(req,res){
 
 app.get('/nalognovi', function(req,res){
 	console.log(req.query);
-	insertiraj('nalog',req.query,function{
+	insertiraj('nalog',req.query,function(){
 		res.send({message:'Uspješno unesen servisni nalog'});
 	},function(err){
 		res.send(err);
-	}
+	});
 });
 
 app.get('/selection', function(req,res){
