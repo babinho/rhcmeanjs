@@ -36,7 +36,7 @@ var insertDocument = function(db,collection,data, success,fail) {
 				}
 		  }
   );
-};
+}
 
 
 var insertiraj = function(collection,data,success,fail){
@@ -45,6 +45,8 @@ var insertiraj = function(collection,data,success,fail){
 	  insertDocument(db,collection,data, function() {
 		  success();
 		  
+	  },function(err){
+		  fail(err)
 	  });
 	});
 }
@@ -130,6 +132,22 @@ app.get('/selection', function(req,res){
 	
 	console.log(req.query.selection);
 	dohvati(req.query.selection,{},function(result){  //selection(id iz klijenta)  /callback result
+		console.log(result);
+		if(result.length != 0){
+			res.send(result);
+			console.log('poslalo: ' + result);
+		}
+		else{
+			res.send({message : '404'});
+		}
+	});
+},function(){
+	res.send()
+});
+
+app.get('/dohvatinaloge', function(req,res){
+	
+	dohvati('nalog',{},function(result){  //selection(id iz klijenta)  /callback result
 		console.log(result);
 		if(result.length != 0){
 			res.send(result);
