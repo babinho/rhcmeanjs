@@ -367,17 +367,19 @@ kad bude optimizacija -->
 		return $('#'+id).is(':checked');
 		
 	}
-	
-	var dohvatiNaloge = function(){
-		ajax({},'/dohvatinaloge',function(result){
-			var nalozi = new Vue({
+	var nalozi = new Vue({
 			  el: '#nalozi',
 			  data: {
-				nalozi: result
+				nalozi: [{ime:"asddas"}]
 			  }
 			});
+	var dohvatiNaloge = function(){
+		ajax({},'/dohvatinaloge',function(result){
+		console.log(result);
+			nalozi.nalozi = result;
 		});
 	}
+	dohvatiNaloge();
 	
 	
 
