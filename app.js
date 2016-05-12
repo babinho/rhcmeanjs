@@ -8,80 +8,56 @@ const fs           = require('fs'),
 	  
 	  html = require('html'),
 		MongoClient = require('mongodb').MongoClient,
-		assert = require('assert')
-
+		assert = require('assert'),
+		mongoose = require('mongoose')
+		
 let app = express();
 
-//----------------dbconfig------------------
+//----------------dbconfig---------------------------------------------------------------------------------------------------
 
+let mongoUrl = 'mongodb://localhost:27017/test';
+//let mongoUrl = 'mongodb://admin:VTrLiJlV8RbY@127.5.99.130:27017/infoplanetservisapp';
 
-//let mongoUrl = 'mongodb://localhost:27017/test';
-let mongoUrl = 'mongodb://admin:VTrLiJlV8RbY@127.5.99.130:27017/infoplanetservisapp';
-//---------------------------------------------------
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+	console.log('connection opened!');
+  
+});
 
+mongoose.connect(mongoUrl);
 
-var insertDocument = function(db,collection,data, success,fail) {
-   db.collection(collection).insert(
-			data,
-			function(err, result) {
-				if(err){
-					console.log('failed to insert');
-					fail(err);
-					db.close();
-				}
-				else{
-					assert.equal(err, null);
-					console.log("insertiarno u kolekciju naloga");
-					success();
-					db.close();
-				}
-		  }
-  );
-}
+var nalogSchema = mongoose.Schema({
+    ime: String,
+	prezime:String,
+	vrsta:String,
+	marka:String,
+	opiskvara:String,
+	pretpkvara:String,
+	pretpcijena:Number,
+	serviser:String,
+	dodatno:Object
+});
 
-
-var insertiraj = function(collection,data,success,fail){
-	MongoClient.connect(mongoUrl, function(err, db) {
-	  assert.equal(null, err);
-	  insertDocument(db,collection,data, function() {
-		  success();
-		  
-	  },function(err){
-		  fail(err)
-	  });
-	});
-}
-
-
-//-----------------------------------------------------------------
+var nalog = mongoose.model('nalog', nalogSchema);
+//---------------------------------------------------------------------------------------------------------------------------
 
 
 
 
-var dohvati = function(kolekcija,query,callback){ 
-	MongoClient.connect(mongoUrl, function(err, db) {
-		console.log('uslo u konekciju :');
-		
-		console.log(kolekcija);
-		assert.equal(null, err);
-		var cursor = db.collection(kolekcija).find({});
-		var result=[];
-		
-		cursor.each(function(err, doc) {
-		  assert.equal(err, null);
-		  if (doc != null) {
-			  result.push(doc); 
-			  
-			 //console.dir(doc);   //radi
-			 console.log(doc.ime);  //radi
-		  } else {
-				db.close();
-				//console.log('izašlo iz konekcije');
-				callback(result);
-		  }
-	   });
-	});
-}
+/*
+var Cat = mongoose.model('Cat', { name: String });
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('meow');
+  }
+});
+*/
+
 
 
 //setTimeout(console.log(rez),3000);
@@ -122,11 +98,12 @@ app.get('/', function(req,res){
 
 app.get('/nalognovi', function(req,res){
 	console.log(req.query);
-	insertiraj('nalog',req.query,function(){
-		res.send({message:'Uspješno unesen servisni nalog'});
-	},function(err){
-		res.send(err);
+	var noviNalog = new nalog(req.query);
+	noviNalog.save(function(err,nalog){
+		if(err) return console.log(err);
+		console.log(nalog);
 	});
+	
 });
 
 app.get('/selection', function(req,res){
@@ -147,19 +124,12 @@ app.get('/selection', function(req,res){
 });
 
 app.get('/dohvatinaloge', function(req,res){
-	
-	dohvati('nalog',{},function(result){  //selection(id iz klijenta)  /callback result
-		console.log(result);
-		if(result.length != 0){
-			res.send(result);
-			console.log('poslalo: ' + result);
-		}
-		else{
-			res.send({message : '404'});
-		}
+	console.log('get /dohvatinaloge');
+	nalog.find(function(err,nalozi){
+		if(err) return console.log(err);
+		console.log(nalozi);
+		res.send(nalozi);
 	});
-},function(){
-	res.send()
 });
  
  // IMPORTANT: Your application HAS to respond to GET /health with status 200
