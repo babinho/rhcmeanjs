@@ -34,7 +34,7 @@ var nalogSchema = mongoose.Schema({
 	marka:String,
 	opiskvara:String,
 	pretpkvara:String,
-	pretpcijena:Number,
+	pretpcijena:String,
 	serviser:String,
 	dodatno:Object
 });
@@ -102,6 +102,7 @@ app.get('/nalognovi', function(req,res){
 	noviNalog.save(function(err,nalog){
 		if(err) return console.log(err);
 		console.log(nalog);
+		res.send({status : 200});
 	});
 	
 });
